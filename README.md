@@ -1,6 +1,8 @@
 # maze_p5
 A maze generator using p5.js Lib
 
+Live Demo [Here](https://shadosky.github.io/Maze_p5/)
+
 ---
 
 # Exploration exhaustive
