@@ -1,7 +1,10 @@
 var scl = 40;
 var rows, cols;
 var cellsArray = [];
-var visitor;
+var visitor, solver;
+
+var generated  = false;
+var solved = false;
 
 var trueSize = 800;
 var margin = 10;
@@ -9,8 +12,8 @@ var canSize = trueSize+2*margin;
 
 var visitedCells = 0;
 var startcell = 0;
+var entranceCell, exitCell;
 
-var inception = 0;
 var debugMode = false;
 
 function setup() {
@@ -27,7 +30,10 @@ function setup() {
 		}
 	}
 
+	startcell = floor(random(cellsArray.length));
 	visitor = new Visitor(startcell);
+
+
 }
 
 function draw() {
@@ -40,8 +46,15 @@ function draw() {
     		cellsArray[nbCell].debug();
     }
 
-    if(visitedCells < cellsArray.length)
+    if(!generated) {
     	visitor.run();
+    } else if (!solved) {
+    	if(typeof solver == 'undefined') {
+    		solver = new Solver(entranceCell);
+    	} else {
+    		solver.run();
+    	}
+    }
 
     if(debugMode) {
     	// test

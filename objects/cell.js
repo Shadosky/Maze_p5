@@ -65,6 +65,30 @@ function Cell(x, y, nbCell)
     	return nearCells;
     }
 
+    this.getNearwalkableCells = function ()
+    {
+    	var nearCells = [];
+    	if(this.nbCell > cols-1 && this.openTop) {
+    		if(!cellsArray[this.nbCell - cols].visited)
+    			nearCells.push(cellsArray[this.nbCell - cols]);
+    	}
+    	if(this.nbCell%cols != cols-1 && this.openRight) {
+    		if(!cellsArray[this.nbCell + 1].visited)
+				nearCells.push(cellsArray[this.nbCell + 1]);
+		}
+		if(this.nbCell < (rows-1)*cols && this.openBot) {
+			if(!cellsArray[this.nbCell + cols].visited)
+				nearCells.push(cellsArray[this.nbCell + cols]);
+		}
+		if(this.nbCell%cols != 0 && this.openLeft) {
+			if(!cellsArray[this.nbCell - 1].visited)
+				nearCells.push(cellsArray[this.nbCell - 1]);
+    	}
+
+    	return nearCells;
+    }
+
+
     this.getNearUnvisitedCells = function ()
     {
     	var nearCells = [];
